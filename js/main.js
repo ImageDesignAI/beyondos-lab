@@ -55,12 +55,10 @@
   function syncSpy() {
     if (!spy.length) return;
     var line = window.scrollY + 100;          // a touch below the fixed header
-    var cur = spy[0];                          // default to the first section (Mission)
+    var cur = null;                            // no tab highlighted until a section passes the line (hero = none)
     spy.forEach(function (s) { if (s.el.offsetTop <= line) cur = s; });
-    if (!cur.tab.classList.contains("on")) {
-      tabsEl.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("on"); });
-      cur.tab.classList.add("on");
-    }
+    var active = cur ? cur.tab : null;
+    tabsEl.querySelectorAll(".tab").forEach(function (x) { x.classList.toggle("on", x === active); });
   }
 
   // sticky chrome + scrollspy
