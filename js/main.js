@@ -57,28 +57,6 @@
     });
   });
 
-  // field settings panel
-  var fset = document.getElementById("fset");
-  document.getElementById("ftoggle").addEventListener("click", function () {
-    fset.dataset.open = fset.dataset.open === "1" ? "0" : "1";
-  });
-  document.getElementById("fclose").addEventListener("click", function () { fset.dataset.open = "0"; });
-
-  function bind(rangeId, valId, fmt, apply) {
-    var r = document.getElementById(rangeId), v = document.getElementById(valId);
-    r.addEventListener("input", function () { v.textContent = fmt(r.value); apply(r.value); });
-  }
-  bind("r-cell", "v-cell", function (x) { return x; }, function (x) { field.set({ cell: +x }); });
-  bind("r-den", "v-den", function (x) { return x; }, function (x) { field.set({ density: +x / 100 }); });
-  bind("r-mot", "v-mot", function (x) { return x; }, function (x) { field.set({ motion: +x / 100 }); });
-
-  document.getElementById("seg-glyph").addEventListener("click", function (e) {
-    var b = e.target.closest("button"); if (!b) return;
-    this.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-    b.classList.add("on");
-    field.set({ glyphs: b.dataset.g });
-  });
-
   // theming hooks — programmatic mode/accent control across the page + scenes.
   var fieldCanvas = document.getElementById("field");
   window.__fieldBaseOpacity = function () { return root.dataset.mode === "light" ? 0.3 : 0.9; };
