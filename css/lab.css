@@ -333,6 +333,15 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
           transform: rotate(-7deg); text-align: center; line-height: 1.25; }
 .pstamp small { display: block; font-size: 9px; letter-spacing: 1.4px; color: rgb(var(--faint)); font-weight: 600; margin-top: 3px; }
 
+/* progress dots — only visible in carousel mode */
+.pdots { display: none; justify-content: center; gap: 7px; margin-top: 22px; }
+.pdots button {
+  width: 7px; height: 7px; border-radius: 999px; padding: 0;
+  border: 0; cursor: pointer; background: rgb(var(--hair) / .22);
+  transition: width .25s, background .25s;
+}
+.pdots button.on { width: 22px; background: rgb(var(--accent)); }
+
 /* responsive — mirrors the component's container queries */
 @container pcards (max-width: 920px) { .pcards { grid-template-columns: repeat(2, 1fr); } }
 @container pcards (max-width: 560px) {
@@ -341,6 +350,7 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
             margin: 0 calc(-1 * var(--pad)); padding: 4px var(--pad) 8px; }
   .pcards::-webkit-scrollbar { display: none; }
   .pcard { flex: 0 0 78%; scroll-snap-align: center; padding: 16px; }
+  .pdots { display: flex; }
 }
 
 /* footer — minimal centered */

@@ -78,3 +78,39 @@
     }
   };
 })();
+
+/* ─── Patents carousel — sync progress dots + tap-to-scroll (carousel mode only).
+   No-op on desktop, where .pcards is a non-scrolling grid. ─────────────────── */
+(function () {
+  var root = document.querySelector(".patents-list");
+  if (!root) return;
+  var grid = root.querySelector(".pcards");
+  var dots = Array.prototype.slice.call(root.querySelectorAll(".pdots button"));
+  var cards = Array.prototype.slice.call(root.querySelectorAll(".pcard"));
+  if (!grid || !dots.length || !cards.length) return;
+
+  function activeIndex() {
+    var center = grid.scrollLeft + grid.clientWidth / 2, best = 0, bestDist = Infinity;
+    cards.forEach(function (c, i) {
+      var mid = c.offsetLeft + c.offsetWidth / 2, d = Math.abs(mid - center);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  }
+  function sync() {
+    var i = activeIndex();
+    dots.forEach(function (d, j) { d.classList.toggle("on", j === i); });
+  }
+  var raf = null;
+  grid.addEventListener("scroll", function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = null; sync(); });
+  }, { passive: true });
+  dots.forEach(function (d, i) {
+    d.addEventListener("click", function () {
+      var target = cards[i].offsetLeft - (grid.clientWidth - cards[i].offsetWidth) / 2;
+      grid.scrollTo({ left: target, behavior: "smooth" });
+    });
+  });
+  sync();
+})();
