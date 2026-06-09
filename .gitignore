@@ -1,0 +1,10 @@
+# Design handoff source bundle (reference only — not part of the deployed site)
+_design_handoff/
+
+# OS / editor cruft
+.DS_Store
+*.log
+node_modules/
+
+# Local Claude Code settings
+.claude/settings.local.json

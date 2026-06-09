@@ -1,0 +1,260 @@
+/* =========================================================================
+   Makermint Design System — Colors + Type
+   Source: ImageDesignAI/Makermint-Studio @develop
+            packages/webui3/src/styles/{tokens-color,tokens-radius,tokens-typography}.css
+   ========================================================================= */
+
+/* ----- Webfont (Geist via Google Fonts; closest open match) ---------------
+   Repo references "Geist" with system fallbacks. We use Google Fonts here
+   because no .ttf/.woff was checked into the repo. Swap for self-hosted
+   files in fonts/ if you want exact brand fidelity. */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: light;
+
+  /* ---------- BRAND ---------- */
+  --mm-mint:                78 171 118;     /* primary tint */
+  --mm-mint-dark:          106 187 141;     /* used on dark surfaces */
+  --mm-yellow:             252 213 115;     /* CTA */
+  --mm-ink:                 32  32  39;     /* CTA text / dark plate */
+  --mm-cream:              250 250 250;     /* button-primary text */
+
+  /* ---------- LABELS (foreground) ---------- */
+  --label:                  10  10  10;
+  --secondary-label:       115 115 115;
+  --tertiary-label:        158 158 158;
+  --quaternary-label:      190 190 190;
+  --quinary-label:         210 210 210;
+  --placeholder-text:      119 119 119;
+
+  /* ---------- BACKGROUNDS ---------- */
+  --background:            255 255 255;
+  --secondary-background:  230 230 230;
+  --tertiary-background:   201 201 201;
+
+  --grouped-background:           255 255 255;
+  --secondary-grouped-background: 245 245 245;
+  --tertiary-grouped-background:  230 230 230;
+
+  /* ---------- SEPARATORS ---------- */
+  --separator:             229 229 229;
+  --opaque-separator:      229 229 229;
+
+  /* ---------- STATUS ---------- */
+  --green:                  78 171 118;
+  --yellow:                252 213 115;
+  --red:                   220  38  38;
+  --blue:                    0 122 255;
+
+  /* ---------- ALIASES ---------- */
+  --tint:    var(--mm-mint);
+  --link:    var(--mm-mint);
+  --accent:  var(--mm-mint-dark);
+  --cta-bg:  var(--mm-yellow);
+  --cta-text: var(--mm-ink);
+  --button-primary-text: var(--mm-cream);
+
+  /* ---------- PLAY THEME (game wrapper, always dark) ---------- */
+  --play-background:        15  15  20;
+  --play-surface:           26  26  36;
+  --play-card:              26  42  58;
+
+  /* ---------- RADII ---------- */
+  --radius-sm:    0.375rem;
+  --radius-md:    0.5rem;
+  --radius-lg:    0.625rem;
+  --radius-xl:    1.0625rem;   /* card / modal */
+  --radius-2xl:   1.5rem;
+  --radius-3xl:   2.25rem;     /* hero card */
+  --radius-pill:  999px;       /* buttons, badges, pills */
+  --radius-form:  1.4375rem;   /* prompt textarea */
+
+  /* ---------- ELEVATION ---------- */
+  --shadow-card:    0 20px 40px rgb(var(--label) / 0.08);
+  --shadow-pop:     0 8px 24px  rgb(var(--label) / 0.12);
+  --shadow-modal:   0 32px 64px rgb(var(--label) / 0.20);
+  --shadow-cta:     0 6px 0 0   rgb(var(--mm-ink) / 0.10);   /* solid drop */
+
+  /* ---------- TYPE: families ---------- */
+  --font-sans:  "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:  "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-title-family:    var(--font-sans);
+  --font-text-h1-family:  var(--font-sans);
+
+  /* ---------- TYPE: scale ---------- */
+  --font-text-h1-size:     4.75rem;
+  --font-text-h1-leading:  4.5rem;
+  --font-text-h1-weight:   800;
+  --font-text-h1-tracking: -1.5px;
+
+  --font-text-h2-size:     3rem;
+  --font-text-h2-leading:  3.75rem;
+  --font-text-h2-weight:   600;
+  --font-text-h2-tracking: -1px;
+
+  --font-text-h3-size:     2.25rem;
+  --font-text-h3-leading:  2.75rem;
+  --font-text-h3-weight:   600;
+  --font-text-h3-tracking: -0.5px;
+
+  --font-text-h4-size:     1.875rem;
+  --font-text-h4-leading:  2.375rem;
+  --font-text-h4-weight:   600;
+
+  --font-text-h5-size:     1.5rem;
+  --font-text-h5-leading:  2rem;
+  --font-text-h5-weight:   600;
+
+  --font-text-h6-size:     1.25rem;
+  --font-text-h6-leading:  1.75rem;
+  --font-text-h6-weight:   600;
+
+  --font-text-lead-size:   1.125rem;
+  --font-text-lead-leading: 1.625rem;
+  --font-text-lead-weight: 500;
+
+  --font-text-body-size:   1rem;
+  --font-text-body-leading: 1.5rem;
+  --font-text-body-weight: 400;
+
+  --font-text-small-size:  0.875rem;
+  --font-text-small-leading: 1.25rem;
+  --font-text-small-weight: 400;
+
+  --font-text-xsmall-size: 0.75rem;
+  --font-text-xsmall-leading: 1rem;
+  --font-text-xsmall-weight: 500;
+
+  /* Hero / CTA display sizes */
+  --font-landing-hero-size: clamp(40px, 7vw, 80px);
+  --font-landing-cta-size:  clamp(36px, 6vw, 56px);
+  --font-landing-hero-weight: 800;
+  --font-landing-hero-tracking: -1.5px;
+  --font-landing-hero-leading: 0.955;
+}
+
+/* =========================================================================
+   DARK MODE — applies when [data-theme="dark"] is set (or use prefers-*)
+   ========================================================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --label:                 245 245 245;
+  --secondary-label:       180 180 180;
+  --tertiary-label:        140 140 140;
+  --quaternary-label:      110 110 110;
+  --quinary-label:          85  85  85;
+  --placeholder-text:      100 100 100;
+
+  --background:             15  18  32;
+  --secondary-background:   25  28  42;
+  --tertiary-background:    35  38  52;
+
+  --grouped-background:           15  18  32;
+  --secondary-grouped-background: 25  28  42;
+  --tertiary-grouped-background:  35  38  52;
+
+  --separator:              55  58  72;
+  --opaque-separator:       55  58  72;
+
+  --green:  106 187 141;
+  --red:    239  68  68;
+  --tint:   var(--mm-mint-dark);
+  --link:   var(--mm-mint-dark);
+}
+
+/* =========================================================================
+   SEMANTIC TYPE CLASSES
+   Direct ports of the repo's text-h1…text-xsmall utility set, plus
+   element defaults so plain markup looks right out of the box.
+   ========================================================================= */
+
+html, body {
+  font-family: var(--font-sans);
+  font-size: var(--font-text-body-size);
+  line-height: var(--font-text-body-leading);
+  color: rgb(var(--label));
+  background: rgb(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .text-h1 {
+  font-family: var(--font-text-h1-family);
+  font-size: var(--font-text-h1-size);
+  line-height: var(--font-text-h1-leading);
+  font-weight: var(--font-text-h1-weight);
+  letter-spacing: var(--font-text-h1-tracking);
+}
+h2, .text-h2 {
+  font-family: var(--font-title-family);
+  font-size: var(--font-text-h2-size);
+  line-height: var(--font-text-h2-leading);
+  font-weight: var(--font-text-h2-weight);
+  letter-spacing: var(--font-text-h2-tracking);
+}
+h3, .text-h3 {
+  font-family: var(--font-title-family);
+  font-size: var(--font-text-h3-size);
+  line-height: var(--font-text-h3-leading);
+  font-weight: var(--font-text-h3-weight);
+  letter-spacing: var(--font-text-h3-tracking);
+}
+h4, .text-h4 {
+  font-family: var(--font-title-family);
+  font-size: var(--font-text-h4-size);
+  line-height: var(--font-text-h4-leading);
+  font-weight: var(--font-text-h4-weight);
+}
+h5, .text-h5 {
+  font-family: var(--font-title-family);
+  font-size: var(--font-text-h5-size);
+  line-height: var(--font-text-h5-leading);
+  font-weight: var(--font-text-h5-weight);
+}
+h6, .text-h6 {
+  font-family: var(--font-title-family);
+  font-size: var(--font-text-h6-size);
+  line-height: var(--font-text-h6-leading);
+  font-weight: var(--font-text-h6-weight);
+}
+
+.text-lead {
+  font-size: var(--font-text-lead-size);
+  line-height: var(--font-text-lead-leading);
+  font-weight: var(--font-text-lead-weight);
+}
+p, .text-body {
+  font-size: var(--font-text-body-size);
+  line-height: var(--font-text-body-leading);
+  font-weight: var(--font-text-body-weight);
+}
+small, .text-small {
+  font-size: var(--font-text-small-size);
+  line-height: var(--font-text-small-leading);
+  font-weight: var(--font-text-small-weight);
+}
+.text-xsmall {
+  font-size: var(--font-text-xsmall-size);
+  line-height: var(--font-text-xsmall-leading);
+  font-weight: var(--font-text-xsmall-weight);
+}
+code, kbd, pre, .text-mono { font-family: var(--font-mono); }
+a { color: rgb(var(--link)); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.text-hero {
+  font-family: var(--font-sans);
+  font-size: var(--font-landing-hero-size);
+  font-weight: var(--font-landing-hero-weight);
+  letter-spacing: var(--font-landing-hero-tracking);
+  line-height: var(--font-landing-hero-leading);
+}
+.text-cta {
+  font-family: var(--font-sans);
+  font-size: var(--font-landing-cta-size);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
