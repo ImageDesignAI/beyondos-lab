@@ -11,7 +11,7 @@
   function rgb(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
 
   var field = BeyondField.mount(document.getElementById("field"), {
-    cell: 17, density: 0.72, motion: 1, glyphs: "tilemap",
+    cell: 17, density: 0.72, motion: 1, glyphs: "binary",
     accent: rgb("--accent"), ink: rgb("--paper"),
     font: "'Geist Mono', ui-monospace, monospace"
   });
@@ -28,7 +28,7 @@
   window.__mscene = mscene;
   var mfEl = document.getElementById("mission-field");
   var mfield = mfEl ? BeyondField.mount(mfEl, {
-    cell: 12, density: 0.5, motion: 1, glyphs: "tilemap",
+    cell: 12, density: 0.5, motion: 1, glyphs: "binary",
     accent: rgb("--accent"), ink: rgb("--paper"),
     font: "'Geist Mono', ui-monospace, monospace"
   }) : null;
