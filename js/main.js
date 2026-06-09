@@ -34,18 +34,46 @@
   }) : null;
   window.__mfield = mfield;
 
-  // sticky chrome
-  var chrome = document.querySelector("header.chrome");
-  var onScroll = function () { chrome.dataset.stuck = window.scrollY > 40 ? "1" : "0"; };
-  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
-
-  // top tabs — active-state toggle
+  // top tabs — active-state toggle on click + scrollspy
   var tabsEl = document.getElementById("tabs");
-  if (tabsEl) tabsEl.addEventListener("click", function (e) {
-    var b = e.target.closest(".tab"); if (!b) return;
-    tabsEl.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("on"); });
-    b.classList.add("on");
-  });
+  var spy = [];
+  if (tabsEl) {
+    tabsEl.addEventListener("click", function (e) {
+      var b = e.target.closest(".tab"); if (!b) return;
+      tabsEl.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+    });
+    // build the scrollspy map from tabs that point at a real section
+    tabsEl.querySelectorAll(".tab").forEach(function (t) {
+      var href = t.getAttribute("href") || "";
+      if (href.charAt(0) === "#" && href.length > 1) {
+        var sec = document.getElementById(href.slice(1));
+        if (sec) spy.push({ tab: t, el: sec });
+      }
+    });
+  }
+  function syncSpy() {
+    if (!spy.length) return;
+    var line = window.scrollY + 100;          // a touch below the fixed header
+    var cur = spy[0];                          // default to the first section (Mission)
+    spy.forEach(function (s) { if (s.el.offsetTop <= line) cur = s; });
+    if (!cur.tab.classList.contains("on")) {
+      tabsEl.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("on"); });
+      cur.tab.classList.add("on");
+    }
+  }
+
+  // sticky chrome + scrollspy
+  var chrome = document.querySelector("header.chrome");
+  var raf = null;
+  var onScroll = function () {
+    chrome.dataset.stuck = window.scrollY > 40 ? "1" : "0";
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = null; syncSpy(); });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  syncSpy();
 
   // smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
