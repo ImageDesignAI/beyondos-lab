@@ -210,7 +210,7 @@ html[data-mode="light"] .hero-card { box-shadow: 0 30px 70px rgb(0 0 0 / .14); }
 .essay-link .arr { margin-left: 6px; color: rgb(var(--accent)); }
 
 /* ── mission section — GI-style split: full-width title, text rows | glyph-art panel ── */
-.mission-sec { padding-block: clamp(70px, 11vh, 130px); overflow: hidden; }
+.mission-sec { padding-top: clamp(70px, 11vh, 130px); padding-bottom: 0; overflow: hidden; }
 .mission-head { max-width: none; margin: 0 0 clamp(26px, 4vh, 46px); padding-inline: var(--pad); }
 .mission-head .idx { display: block; margin-bottom: 18px; }
 .mission-title {
@@ -221,7 +221,6 @@ html[data-mode="light"] .hero-card { box-shadow: 0 30px 70px rgb(0 0 0 / .14); }
 .mission-split {
   display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
   border-top: 1px solid rgb(var(--hair) / .12);
-  border-bottom: 1px solid rgb(var(--hair) / .12);
 }
 .mission-text { display: flex; flex-direction: column; }
 .mrow {
@@ -278,7 +277,7 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
 }
 
 /* footer — minimal centered */
-footer { padding-block: clamp(56px, 8vh, 90px) 40px; border-top: 1px solid rgb(var(--hair) / .1); position: relative; z-index: 2; background: rgb(var(--ink)); }
+footer { padding-block: clamp(56px, 8vh, 90px) 40px; position: relative; z-index: 2; background: rgb(var(--ink)); }
 footer.foot-min .wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
 .foot-icons { display: flex; gap: 24px; align-items: center; }
 .foot-icons a { color: rgb(var(--faint)); display: inline-flex; transition: color .2s, transform .2s; }
