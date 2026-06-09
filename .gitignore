@@ -1,5 +1,6 @@
-# Design handoff source bundle (reference only — not part of the deployed site)
+# Design handoff source bundles (reference only — not part of the deployed site)
 _design_handoff/
+_design_handoff2/
 
 # OS / editor cruft
 .DS_Store

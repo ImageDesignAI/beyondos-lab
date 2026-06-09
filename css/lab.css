@@ -276,6 +276,73 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
   }
 }
 
+/* ── patents section · adapted from the Makermint "stickers" card component ── */
+.patents-sec { padding-block: clamp(72px, 11vh, 130px); border-top: 1px solid rgb(var(--hair) / .12); }
+.patents-head { max-width: var(--maxw); margin: 0 auto clamp(30px, 5vh, 52px); padding-inline: var(--pad);
+                display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.patents-head .eyebrow { margin-bottom: 14px; }
+.patents-title { margin: 0; font-weight: 800; letter-spacing: -1.6px; line-height: 1.0;
+                 font-size: clamp(30px, 4.6vw, 64px); max-width: 16ch; text-wrap: balance; }
+.patents-title .mint { color: rgb(var(--accent)); }
+.patents-count { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase;
+                 color: rgb(var(--faint)); white-space: nowrap; }
+
+.patents-list { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); container: pcards / inline-size; }
+.pcards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+/* card — same skeleton as .mf-card, themed dark */
+.pcard {
+  background: rgb(var(--ink-2)); border: 1px solid rgb(var(--hair) / .1);
+  border-radius: 24px; padding: 22px; display: flex; flex-direction: column;
+  transition: border-color .25s, transform .25s, background .25s;
+}
+.pcard:hover { border-color: rgb(var(--accent) / .4); transform: translateY(-3px); background: rgb(var(--ink-3)); }
+.pcard__step { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+               text-transform: uppercase; color: rgb(var(--accent)); }
+.pcard__title { font-size: 21px; font-weight: 800; letter-spacing: -.5px; margin: 8px 0 7px; line-height: 1.1; }
+.pcard__desc { font-size: 13.5px; line-height: 1.5; color: rgb(var(--muted)); margin: 0 0 20px; }
+.pcard__desc .em { color: rgb(var(--paper)); font-weight: 600; }
+.pcard__claims { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.pcard__claims li { position: relative; padding-left: 18px; font-size: 13.5px; line-height: 1.45; color: rgb(var(--muted)); }
+.pcard__claims li::before { content: "›"; position: absolute; left: 2px; color: rgb(var(--accent)); font-family: var(--font-mono); }
+
+/* the patent "stage" — analog of .mf-stage sticker sheet */
+.pcard__stage {
+  margin-top: auto; aspect-ratio: 4 / 3; border-radius: 16px; position: relative; overflow: hidden;
+  display: grid; place-items: center; padding: 16px;
+  background:
+    radial-gradient(circle at 1px 1px, rgb(var(--hair) / .07) 1.5px, transparent 1.6px) 0 0 / 14px 14px,
+    rgb(var(--ink));
+  border: 1px solid rgb(var(--hair) / .08);
+}
+
+/* granted plate: big patent number */
+.pplate { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.pplate__no { font-family: var(--font-mono); font-weight: 600; letter-spacing: -.3px; line-height: 1;
+              font-size: 18px; white-space: nowrap; color: rgb(var(--paper)); }
+.pplate__no b { color: rgb(var(--accent)); }
+.pplate__date { font-family: var(--font-mono); font-size: 11px; letter-spacing: .4px; color: rgb(var(--faint)); }
+.pplate__seal { width: 46px; height: 46px; border-radius: 999px; display: grid; place-items: center;
+                border: 1.5px solid rgb(var(--accent) / .55); color: rgb(var(--accent)); margin-bottom: 2px; }
+.pplate__seal svg { width: 22px; height: 22px; }
+
+/* pending plate: stamp */
+.pstamp { font-family: var(--font-mono); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+          font-size: 13px; color: rgb(var(--muted) / .9);
+          border: 2px solid rgb(var(--muted) / .4); border-radius: 8px; padding: 9px 14px;
+          transform: rotate(-7deg); text-align: center; line-height: 1.25; }
+.pstamp small { display: block; font-size: 9px; letter-spacing: 1.4px; color: rgb(var(--faint)); font-weight: 600; margin-top: 3px; }
+
+/* responsive — mirrors the component's container queries */
+@container pcards (max-width: 920px) { .pcards { grid-template-columns: repeat(2, 1fr); } }
+@container pcards (max-width: 560px) {
+  .pcards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; scrollbar-width: none;
+            margin: 0 calc(-1 * var(--pad)); padding: 4px var(--pad) 8px; }
+  .pcards::-webkit-scrollbar { display: none; }
+  .pcard { flex: 0 0 78%; scroll-snap-align: center; padding: 16px; }
+}
+
 /* footer — minimal centered */
 footer { padding-block: clamp(56px, 8vh, 90px) 40px; position: relative; z-index: 2; background: rgb(var(--ink)); }
 footer.foot-min .wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
