@@ -77,7 +77,7 @@
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
-      if (id.length < 2) return;
+      if (id.length < 2) { e.preventDefault(); return; }   // inert "#" placeholder
       var el = document.querySelector(id);
       if (el) { e.preventDefault(); window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: "smooth" }); }
     });

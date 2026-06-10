@@ -144,6 +144,16 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
   content: ""; position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px;
   background: rgb(var(--accent)); border-radius: 2px;
 }
+/* product pills (Makermint / Enterprise) */
+.pill {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase;
+  color: rgb(var(--accent)); margin-left: 2px;
+  border: 1px solid rgb(var(--hair) / .2); border-radius: 10px; padding: 6px 13px;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.pill:hover { border-color: rgb(var(--accent) / .5); background: rgb(var(--accent) / .08); }
+.pill .mlogo { height: 12px; width: auto; display: block; }
 @media (max-width: 760px) {
   header.chrome { align-items: flex-start; }
   .tabs { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
