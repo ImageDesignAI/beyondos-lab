@@ -1,0 +1,10 @@
+# Design handoff source bundles (reference only — not part of the deployed site)
+_design_handoff/
+_design_handoff2/
+
+# Local tooling / cruft
+.claude/
+.git/
+*.log
+.DS_Store
+node_modules/
