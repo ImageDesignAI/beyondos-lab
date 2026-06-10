@@ -149,7 +149,7 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
   display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
   font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase;
   color: rgb(var(--accent)); margin-left: 2px;
-  border: 1px solid rgb(var(--accent)); border-radius: 999px; padding: 2px 5px;
+  border: 1px solid rgb(var(--accent)); border-radius: 999px; padding: 1px 5px;
   transition: color .2s, border-color .2s, background .2s;
 }
 .pill:hover { background: rgb(var(--accent) / .12); }
