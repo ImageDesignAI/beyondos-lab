@@ -83,6 +83,20 @@
     });
   });
 
+  // toast + "coming soon" for the Enterprise pill
+  var toastEl = document.getElementById("toast");
+  var toastMsg = toastEl ? toastEl.querySelector(".toast__msg") : null;
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastMsg.textContent = msg;
+    toastEl.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2600);
+  }
+  var entBtn = document.querySelector('.pill[data-tab="enterprise"]');
+  if (entBtn) entBtn.addEventListener("click", function (e) { e.preventDefault(); showToast("Coming soon"); });
+
   // theming hooks — programmatic mode/accent control across the page + scenes.
   var fieldCanvas = document.getElementById("field");
   window.__fieldBaseOpacity = function () { return root.dataset.mode === "light" ? 0.3 : 0.9; };

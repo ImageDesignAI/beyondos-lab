@@ -154,6 +154,22 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
 }
 .pill:hover { background: rgb(var(--accent) / .12); }
 .pill .mlogo { height: 11px; width: auto; display: block; }
+
+/* toast */
+.toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
+  z-index: 100; pointer-events: none;
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgb(var(--paper));
+  background: rgb(var(--ink-2) / .96); backdrop-filter: blur(12px);
+  border: 1px solid rgb(var(--accent) / .4); border-radius: 999px;
+  padding: 11px 20px; box-shadow: 0 18px 50px rgb(0 0 0 / .5);
+  opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s;
+}
+.toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.toast .dot { width: 7px; height: 7px; border-radius: 999px; background: rgb(var(--accent));
+              box-shadow: 0 0 8px rgb(var(--accent)); }
 @media (max-width: 760px) {
   header.chrome { align-items: flex-start; }
   .tabs { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
