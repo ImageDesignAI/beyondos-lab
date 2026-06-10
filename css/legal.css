@@ -1,0 +1,79 @@
+/* =========================================================================
+   BeyondOS — legal pages (Privacy, Terms)
+   Dark, austere, readable long-form. Built on the Makermint tokens.
+   ========================================================================= */
+:root {
+  --ink:    14 14 18;
+  --ink-2:  20 21 26;
+  --paper:  245 245 247;
+  --muted:  150 153 163;
+  --faint:  99 103 114;
+  --hair:   255 255 255;
+  --accent: 106 187 141;
+  --pad:    clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body.legal {
+  font-family: var(--font-sans);
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.62;
+}
+::selection { background: rgb(var(--accent) / .3); }
+a { color: rgb(var(--accent)); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* top chrome */
+.legal-chrome {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px var(--pad);
+  background: rgb(var(--ink) / .8); backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid rgb(var(--hair) / .08);
+}
+.legal-chrome .brand { font-family: "Nunito", var(--font-sans); font-weight: 700;
+  letter-spacing: -.4px; font-size: 22px; color: rgb(var(--paper)); }
+.legal-chrome .brand:hover { text-decoration: none; }
+.legal-chrome .back { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 1px;
+  text-transform: uppercase; color: rgb(var(--muted)); }
+.legal-chrome .back:hover { color: rgb(var(--paper)); text-decoration: none; }
+
+/* content column */
+.legal-wrap { max-width: 760px; margin: 0 auto; padding: clamp(40px, 7vh, 84px) var(--pad) clamp(60px, 10vh, 120px); }
+.legal-wrap h1 {
+  font-weight: 800; letter-spacing: -1.5px; line-height: 1.05;
+  font-size: clamp(34px, 5.4vw, 58px); margin: 0 0 12px;
+}
+.legal-wrap .updated {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px;
+  color: rgb(var(--faint)); margin: 0 0 clamp(28px, 4vh, 44px);
+  padding-bottom: clamp(22px, 3.5vh, 34px); border-bottom: 1px solid rgb(var(--hair) / .12);
+}
+.legal-wrap h2 {
+  font-weight: 700; letter-spacing: -.6px; line-height: 1.15;
+  font-size: clamp(22px, 2.4vw, 30px); margin: clamp(40px, 6vh, 60px) 0 14px;
+  color: rgb(var(--paper));
+}
+.legal-wrap h3 {
+  font-weight: 600; letter-spacing: -.3px; line-height: 1.25;
+  font-size: clamp(17px, 1.7vw, 20px); margin: 28px 0 10px; color: rgb(var(--paper));
+}
+.legal-wrap p { font-size: 15.5px; line-height: 1.66; color: rgb(var(--muted)); margin: 0 0 16px; }
+.legal-wrap strong { color: rgb(var(--paper)); font-weight: 600; }
+.legal-wrap ul { margin: 0 0 18px; padding-left: 0; list-style: none; }
+.legal-wrap li {
+  position: relative; padding-left: 22px; margin-bottom: 9px;
+  font-size: 15.5px; line-height: 1.6; color: rgb(var(--muted));
+}
+.legal-wrap li::before { content: "›"; position: absolute; left: 4px; top: 0;
+  color: rgb(var(--accent)); font-family: var(--font-mono); }
+.legal-wrap .mono { font-family: var(--font-mono); font-size: 14px; color: rgb(var(--paper)); }
+
+/* footer */
+.legal-foot { border-top: 1px solid rgb(var(--hair) / .1); padding: 34px var(--pad);
+  text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .5px;
+  color: rgb(var(--faint)); }
+.legal-foot a { color: rgb(var(--muted)); }
+.legal-foot .sep { color: rgb(var(--faint)); margin: 0 8px; }

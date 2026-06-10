@@ -384,6 +384,33 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
   .pdots { display: flex; }
 }
 
+/* ── team section · GI-style "Team | Background" split ── */
+.team-sec { padding-block: clamp(60px, 9vh, 110px) clamp(36px, 5vh, 72px); border-top: 1px solid rgb(var(--hair) / .12); }
+.team-split { display: grid; grid-template-columns: 1.12fr 1fr;
+  border-top: 1px solid rgb(var(--hair) / .12); border-bottom: 1px solid rgb(var(--hair) / .12); }
+.team-col { padding-block: clamp(20px, 3vw, 38px); }
+.team-people { padding-inline: var(--pad) clamp(22px, 3vw, 46px); }
+.team-bg { border-left: 1px solid rgb(var(--hair) / .12); padding-inline: clamp(22px, 3vw, 46px) var(--pad); }
+.col-label { font-size: clamp(19px, 1.9vw, 24px); font-weight: 500; letter-spacing: -.2px;
+  color: rgb(var(--faint)); margin: 0 0 clamp(22px, 3.5vh, 38px); }
+.team-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(18px, 3vw, 46px); }
+.team-member { padding: 14px 0; border-top: 1px solid rgb(var(--hair) / .09); }
+.team-member:nth-child(-n+2) { border-top: 0; }
+.team-member .nm { font-size: clamp(15.5px, 1.35vw, 18px); font-weight: 500; letter-spacing: -.2px; color: rgb(var(--paper)); }
+.bg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.bg-slot { display: grid; place-items: center; min-height: 96px; padding: 14px 16px;
+  border: 1px solid rgb(var(--hair) / .12); border-radius: 12px; background: rgb(var(--ink-2) / .5);
+  transition: border-color .2s, background .2s; }
+.bg-slot:hover { border-color: rgb(var(--hair) / .22); background: rgb(var(--ink-2)); }
+.bg-slot img { max-width: 82%; max-height: 44px; width: auto; height: auto; object-fit: contain; opacity: .8; transition: opacity .2s; }
+/* tall crest-style logos read larger */
+.bg-slot img.tall { max-height: 68px; max-width: 90%; }
+.bg-slot:hover img { opacity: 1; }
+@media (max-width: 860px) {
+  .team-split { grid-template-columns: 1fr; }
+  .team-people { padding-inline: var(--pad); }
+  .team-bg { border-left: 0; border-top: 1px solid rgb(var(--hair) / .12); padding-inline: var(--pad); }
+}
 /* footer — minimal centered */
 footer { padding-block: clamp(36px, 5vh, 60px) 40px; position: relative; z-index: 2; background: rgb(var(--ink)); }
 footer.foot-min .wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
