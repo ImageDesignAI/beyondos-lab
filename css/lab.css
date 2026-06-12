@@ -305,87 +305,62 @@ a.mlink .ml-s { font-size: 14px; color: rgb(var(--muted)); }
   }
 }
 
-/* ── patents section · adapted from the Makermint "stickers" card component ── */
-.patents-sec { padding-top: clamp(64px, 9vh, 110px); padding-bottom: clamp(18px, 3vh, 36px); border-top: 1px solid rgb(var(--hair) / .12); }
-.patents-head { max-width: none; margin: 0 0 clamp(30px, 5vh, 52px); padding-inline: var(--pad); }
+/* ── research cards · tilted horizontal carousel ── */
+.patents-sec { padding-top: clamp(64px, 9vh, 110px); padding-bottom: clamp(20px, 3.5vh, 44px); border-top: 1px solid rgb(var(--hair) / .12); }
+.patents-head { max-width: none; margin: 0 0 clamp(16px, 2.5vh, 28px); padding-inline: var(--pad); }
 .patents-title { margin: 0; font-weight: 800; letter-spacing: -2px; line-height: 1.0;
                  font-size: clamp(34px, 5.4vw, 78px); max-width: 19ch; text-wrap: balance; }
 .patents-title .mint { color: rgb(var(--accent)); }
-.patents-count { display: block; max-width: none; margin: clamp(22px, 4vh, 38px) 0 0; padding-inline: var(--pad);
-                 font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase;
-                 color: rgb(var(--faint)); }
 
-.patents-list { max-width: none; margin: 0; padding-inline: var(--pad); container: pcards / inline-size; }
-.pcards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.patents-list { max-width: none; margin: 0; position: relative; }
+.pcards {
+  display: flex; gap: clamp(16px, 2vw, 26px);
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  padding: 50px var(--pad) 83px;
+}
+.pcards::-webkit-scrollbar { display: none; }
 
-/* card — same skeleton as .mf-card, themed dark */
 .pcard {
+  flex: 0 0 clamp(280px, 30vw, 350px); scroll-snap-align: center;
   background: rgb(var(--ink-2)); border: 1px solid rgb(var(--hair) / .1);
   border-radius: 24px; padding: 22px; display: flex; flex-direction: column;
-  transition: border-color .25s, transform .25s, background .25s;
+  transform-origin: 50% 100%; will-change: transform;     /* arch transform set by JS */
+  transition: border-color .25s, background .25s, box-shadow .3s;
 }
-.pcard:hover { border-color: rgb(var(--accent) / .4); transform: translateY(-3px); background: rgb(var(--ink-3)); }
+.pcard:hover {
+  border-color: rgb(var(--accent) / .4); background: rgb(var(--ink-3));
+  box-shadow: 0 28px 56px rgb(0 0 0 / .45);
+}
+
 /* granted card links to the patent PDF */
 .pcard--link { position: relative; cursor: pointer; }
+.pcard--link, .pcard--link:hover, .pcard--link * { text-decoration: none; }
 .pcard__open { position: absolute; top: 18px; right: 20px; font-family: var(--font-mono);
-               font-size: 16px; line-height: 1; color: rgb(var(--accent) / .55);
+               font-size: 16px; line-height: 1; color: rgb(var(--accent) / .55); z-index: 2;
                transition: color .2s, transform .2s; }
 .pcard--link:hover .pcard__open { color: rgb(var(--accent)); transform: translate(2px, -2px); }
 .pcard__step { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
                text-transform: uppercase; color: rgb(var(--accent)); }
 .pcard__title { font-size: 21px; font-weight: 800; letter-spacing: -.5px; margin: 8px 0 7px; line-height: 1.1; }
-.pcard__desc { font-size: 13.5px; line-height: 1.5; color: rgb(var(--muted)); margin: 0 0 20px; }
+.pcard__desc { font-size: 13.5px; line-height: 1.5; color: rgb(var(--muted)); margin: 0 0 20px; min-height: 60px; }
 .pcard__desc .em { color: rgb(var(--paper)); font-weight: 600; }
 
-/* the patent "stage" — analog of .mf-stage sticker sheet */
-.pcard__stage {
-  margin-top: auto; aspect-ratio: 4 / 3; border-radius: 16px; position: relative; overflow: hidden;
-  display: grid; place-items: center; padding: 16px;
-  background:
-    radial-gradient(circle at 1px 1px, rgb(var(--hair) / .07) 1.5px, transparent 1.6px) 0 0 / 14px 14px,
-    rgb(var(--ink));
-  border: 1px solid rgb(var(--hair) / .08);
-}
-
-/* granted plate: big patent number */
-.pplate { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.pplate__no { font-family: var(--font-mono); font-weight: 600; letter-spacing: -.3px; line-height: 1;
-              font-size: 18px; white-space: nowrap; color: rgb(var(--paper)); }
-.pplate__no b { color: rgb(var(--accent)); }
-.pplate__date { font-family: var(--font-mono); font-size: 11px; letter-spacing: .4px; color: rgb(var(--faint)); }
-.pplate__seal { width: 46px; height: 46px; border-radius: 999px; display: grid; place-items: center;
-                border: 1.5px solid rgb(var(--accent) / .55); color: rgb(var(--accent)); margin-bottom: 2px; }
-.pplate__seal svg { width: 22px; height: 22px; }
-
-/* pending plate: stamp */
-.pstamp { font-family: var(--font-mono); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-          font-size: 13px; color: rgb(var(--muted) / .9);
-          border: 2px solid rgb(var(--muted) / .4); border-radius: 8px; padding: 9px 14px;
-          transform: rotate(-7deg); text-align: center; line-height: 1.25; }
-.pstamp small { display: block; font-size: 9px; letter-spacing: 1.4px; color: rgb(var(--faint)); font-weight: 600; margin-top: 3px; }
-
-/* capability cards — image fills the stage */
-.pcard--cap .pcard__stage { padding: 0; }
+.pcard__stage { margin-top: auto; aspect-ratio: 4 / 3; border-radius: 16px; position: relative; overflow: hidden;
+  border: 1px solid rgb(var(--hair) / .08); background: rgb(var(--ink)); }
 .pcard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* progress dots — only visible in carousel mode */
-.pdots { display: none; justify-content: center; gap: 7px; margin-top: 22px; }
-.pdots button {
-  width: 7px; height: 7px; border-radius: 999px; padding: 0;
-  border: 0; cursor: pointer; background: rgb(var(--hair) / .22);
-  transition: width .25s, background .25s;
-}
-.pdots button.on { width: 22px; background: rgb(var(--accent)); }
+/* carousel nav arrows */
+.pcards-nav { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  display: flex; gap: 12px; z-index: 120; }
+.pnav { width: 46px; height: 46px; border-radius: 999px; cursor: pointer; padding: 0;
+  display: grid; place-items: center; font-size: 22px; line-height: 1; font-family: var(--font-sans);
+  background: transparent; color: rgb(var(--muted));
+  border: 1px solid rgb(var(--hair) / .2); transition: color .2s, border-color .2s, background .2s; }
+.pnav:hover { color: rgb(var(--accent)); border-color: rgb(var(--accent) / .5); background: rgb(var(--accent) / .08); }
 
-/* responsive — mirrors the component's container queries */
-@container pcards (max-width: 920px) { .pcards { grid-template-columns: repeat(2, 1fr); } }
-@container pcards (max-width: 560px) {
-  .pcards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch; scrollbar-width: none;
-            margin: 0 calc(-1 * var(--pad)); padding: 4px var(--pad) 8px; }
-  .pcards::-webkit-scrollbar { display: none; }
-  .pcard { flex: 0 0 78%; scroll-snap-align: center; padding: 16px; }
-  .pdots { display: flex; }
+@media (max-width: 760px) {
+  .pcard { flex-basis: 80%; }
 }
 
 /* ── team section · GI-style "Team | Background" split ── */

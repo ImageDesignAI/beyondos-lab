@@ -119,38 +119,85 @@
   };
 })();
 
-/* ─── Patents carousel — sync progress dots + tap-to-scroll (carousel mode only).
-   No-op on desktop, where .pcards is a non-scrolling grid. ─────────────────── */
+/* ─── Research carousel — infinite arched scroll. Clones the card set on both
+   sides so it loops seamlessly; starts centred on card 001. The card nearest
+   the centre sits upright and tallest, neighbours curve down and tilt away.
+   Flat (no arch) on mobile. ──────────────────────────────────────────────── */
 (function () {
-  var root = document.querySelector(".patents-list");
+  var root = document.querySelector(".patents-sec");
   if (!root) return;
   var grid = root.querySelector(".pcards");
-  var dots = Array.prototype.slice.call(root.querySelectorAll(".pdots button"));
-  var cards = Array.prototype.slice.call(root.querySelectorAll(".pcard"));
-  if (!grid || !dots.length || !cards.length) return;
+  var navs = grid ? Array.prototype.slice.call(root.querySelectorAll(".pnav")) : [];
+  if (!grid) return;
+  var originals = Array.prototype.slice.call(grid.querySelectorAll(".pcard"));
+  if (originals.length < 2) return;
 
-  function activeIndex() {
-    var center = grid.scrollLeft + grid.clientWidth / 2, best = 0, bestDist = Infinity;
-    cards.forEach(function (c, i) {
-      var mid = c.offsetLeft + c.offsetWidth / 2, d = Math.abs(mid - center);
-      if (d < bestDist) { bestDist = d; best = i; }
+  // [clone set] [originals] [clone set]  → seamless loop, room to centre 001
+  var lead = document.createDocumentFragment(), trail = document.createDocumentFragment();
+  originals.forEach(function (c) {
+    var a = c.cloneNode(true); a.setAttribute("aria-hidden", "true"); a.dataset.clone = "1"; lead.appendChild(a);
+    var b = c.cloneNode(true); b.setAttribute("aria-hidden", "true"); b.dataset.clone = "1"; trail.appendChild(b);
+  });
+  grid.insertBefore(lead, originals[0]);
+  grid.appendChild(trail);
+  var cards = Array.prototype.slice.call(grid.querySelectorAll(".pcard"));
+  var firstReal = cards[originals.length];   // the real card 001
+
+  var setStride = 0, home = 0, inited = false;
+  function metrics() {
+    setStride = firstReal.offsetLeft - cards[0].offsetLeft;             // width of one full set
+    home = firstReal.offsetLeft + firstReal.offsetWidth / 2 - grid.clientWidth / 2;  // centres 001
+  }
+  function wrap() {
+    if (setStride <= 0) return;
+    if (grid.scrollLeft >= home + setStride) grid.scrollLeft -= setStride;
+    else if (grid.scrollLeft < home) grid.scrollLeft += setStride;
+  }
+  function arch() {
+    var desktop = window.innerWidth > 760;
+    var half = grid.clientWidth / 2;
+    var center = grid.scrollLeft + half;
+    cards.forEach(function (c) {
+      if (!desktop) { c.style.transform = ""; c.style.zIndex = ""; return; }
+      var mid = c.offsetLeft + c.offsetWidth / 2;
+      var dx = (mid - center) / half;
+      if (dx < -1.8) dx = -1.8; else if (dx > 1.8) dx = 1.8;
+      var rot = dx * 5, ty = dx * dx * 46, sc = 1 - Math.abs(dx) * 0.05;
+      c.style.transform = "translateY(" + ty.toFixed(1) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
+      c.style.zIndex = String(Math.round(100 - Math.abs(dx) * 40));
     });
-    return best;
   }
-  function sync() {
-    var i = activeIndex();
-    dots.forEach(function (d, j) { d.classList.toggle("on", j === i); });
+
+  function step() {
+    var w = firstReal.getBoundingClientRect().width || grid.clientWidth * 0.8;
+    var gapStr = getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || "20px";
+    return w + (parseFloat(gapStr) || 20);
   }
+  navs.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var dir = parseInt(b.getAttribute("data-dir"), 10) || 1;
+      grid.scrollBy({ left: dir * step(), behavior: "smooth" });
+    });
+  });
+
   var raf = null;
   grid.addEventListener("scroll", function () {
     if (raf) return;
-    raf = requestAnimationFrame(function () { raf = null; sync(); });
+    raf = requestAnimationFrame(function () { raf = null; wrap(); arch(); });
   }, { passive: true });
-  dots.forEach(function (d, i) {
-    d.addEventListener("click", function () {
-      var target = cards[i].offsetLeft - (grid.clientWidth - cards[i].offsetWidth) / 2;
-      grid.scrollTo({ left: target, behavior: "smooth" });
-    });
+
+  function init() {
+    metrics();
+    if (!inited && setStride > 0) { grid.scrollLeft = home; inited = true; }
+    arch();
+  }
+  window.addEventListener("resize", function () {
+    var prev = setStride ? (grid.scrollLeft - home) : 0;
+    metrics();
+    if (setStride > 0) grid.scrollLeft = home + ((prev % setStride) + setStride) % setStride;
+    arch();
   });
-  sync();
+  window.addEventListener("load", init);
+  init();
+  requestAnimationFrame(init);
 })();
