@@ -184,6 +184,13 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
   /* on mobile, show the product tabs as plain text — not pills */
   .pill { border: 0; border-radius: 0; background: none; padding: 6px 7px; margin-left: 0; }
   .pill:hover { background: none; }
+  /* the header is now 3 rows tall — extend the top fade down so the green labels read */
+  .veil {
+    background:
+      linear-gradient(180deg, rgb(var(--ink) / .74) 0%, rgb(var(--ink) / .52) 13%, rgb(var(--ink) / 0) 30%),
+      radial-gradient(115% 82% at 50% 4%, transparent 46%, rgb(var(--ink) / .5) 100%),
+      linear-gradient(rgb(var(--ink) / .22), rgb(var(--ink) / .22));
+  }
 }
 
 /* ───────────────────────── HERO ───────────────────────── */
