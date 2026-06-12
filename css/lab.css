@@ -171,12 +171,16 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
 .toast .dot { width: 7px; height: 7px; border-radius: 999px; background: rgb(var(--accent));
               box-shadow: 0 0 8px rgb(var(--accent)); }
 @media (max-width: 760px) {
-  header.chrome { align-items: flex-start; }
-  .tabs { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-  .tab { padding: 6px 10px; }
-  .tab.on::after { left: 10px; right: 10px; bottom: 1px; }
+  /* stack into two centred rows: brand on top, tabs as a horizontal row beneath */
+  header.chrome { flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px var(--pad) 10px; }
+  .brand { justify-content: center; }
+  .tabs { flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center;
+          gap: 2px; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 6px 7px; white-space: nowrap; }
+  .tab.on::after { left: 7px; right: 7px; bottom: 1px; }
   /* on mobile, show the product tabs as plain text — not pills */
-  .pill { border: 0; border-radius: 0; background: none; padding: 6px 10px; margin-left: 0; }
+  .pill { border: 0; border-radius: 0; background: none; padding: 6px 7px; margin-left: 0; }
   .pill:hover { background: none; }
 }
 
