@@ -154,15 +154,16 @@
     else if (grid.scrollLeft < home) grid.scrollLeft += setStride;
   }
   function arch() {
-    var desktop = window.innerWidth > 760;
+    var mobile = window.innerWidth <= 760;
     var half = grid.clientWidth / 2;
     var center = grid.scrollLeft + half;
+    // gentler coefficients on mobile, where neighbours sit much further from centre
+    var rotK = mobile ? 4 : 5, tyK = mobile ? 14 : 46, scK = mobile ? 0.04 : 0.05;
     cards.forEach(function (c) {
-      if (!desktop) { c.style.transform = ""; c.style.zIndex = ""; return; }
       var mid = c.offsetLeft + c.offsetWidth / 2;
       var dx = (mid - center) / half;
       if (dx < -1.8) dx = -1.8; else if (dx > 1.8) dx = 1.8;
-      var rot = dx * 5, ty = dx * dx * 46, sc = 1 - Math.abs(dx) * 0.05;
+      var rot = dx * rotK, ty = dx * dx * tyK, sc = 1 - Math.abs(dx) * scK;
       c.style.transform = "translateY(" + ty.toFixed(1) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
       c.style.zIndex = String(Math.round(100 - Math.abs(dx) * 40));
     });
