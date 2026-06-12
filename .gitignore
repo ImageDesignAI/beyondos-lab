@@ -9,3 +9,6 @@ node_modules/
 
 # Local Claude Code settings
 .claude/settings.local.json
+
+# Netlify CLI local state
+.netlify
