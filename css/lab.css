@@ -133,6 +133,7 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
 @media (max-width: 860px) { nav.links a:not(.btn) { display: none; } }
 /* top tabs */
 .tabs { display: flex; gap: 4px; }
+.tabs-break { display: none; }
 .tab {
   font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase;
   color: rgb(var(--muted)); padding: 9px 14px; border-radius: 999px; position: relative;
@@ -174,11 +175,12 @@ nav.links a:hover { color: rgb(var(--paper)); background: rgb(var(--hair) / .07)
   /* stack into two centred rows: brand on top, tabs as a horizontal row beneath */
   header.chrome { flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px var(--pad) 10px; }
   .brand { justify-content: center; }
-  .tabs { flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center;
-          gap: 2px; width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab { padding: 6px 7px; white-space: nowrap; }
-  .tab.on::after { left: 7px; right: 7px; bottom: 1px; }
+  /* two centred rows: Mission · Research, then the two product tabs beneath */
+  .tabs { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center;
+          gap: 4px 6px; width: 100%; }
+  .tabs-break { display: block; flex-basis: 100%; height: 0; }
+  .tab { padding: 6px 9px; white-space: nowrap; }
+  .tab.on::after { left: 9px; right: 9px; bottom: 1px; }
   /* on mobile, show the product tabs as plain text — not pills */
   .pill { border: 0; border-radius: 0; background: none; padding: 6px 7px; margin-left: 0; }
   .pill:hover { background: none; }
