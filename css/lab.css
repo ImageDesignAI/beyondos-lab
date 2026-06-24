@@ -222,10 +222,14 @@ html[data-mode="light"] .hero-card { box-shadow: 0 30px 70px rgb(0 0 0 / .14); }
   text-transform: uppercase; color: rgb(var(--faint));
   display: block; margin-bottom: 14px;
 }
-.logos { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 22px; }
+.logos { display: flex; flex-wrap: nowrap; align-items: center; gap: 11px 16px; }
 .logos .slot {
-  font-family: var(--font-sans); font-size: 16px; font-weight: 600; letter-spacing: -.2px;
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: -.2px;
   color: rgb(var(--muted)); transition: color .2s; white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .logos { flex-wrap: wrap; gap: 11px 22px; }
+  .logos .slot { font-size: 16px; }
 }
 .logos .slot:hover { color: rgb(var(--paper)); }
 @media (max-width: 540px) { .hero-card { border-radius: 16px; } }
