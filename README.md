@@ -56,5 +56,4 @@ programmatically via `window.__applyMode(mode)` and `window.__applyAccent("R G B
 
 ## TODO / placeholders
 - `About`, `Privacy`, `Terms` footer links point to `#` — wire real URLs.
-- `Atinum Ventures` investor link is a `#` placeholder pending its URL.
 - `Consumer` / `Enterprise` top tabs toggle active state only; no content/views behind them yet.
